@@ -1,0 +1,9 @@
+ElliotSawyer\SilverstripeTypesense\Typesense:
+  collections:
+    ElliotSawyer\TypesenseSearch\Resene\ReseneColour:
+      name: Colours
+      fields:
+        - { name: .*, type: auto, optional: true }
+        - { name: Charts, type: string[], facet: true, sort: false }
+        - { name: Category, type: string, facet: true, sort: false }
+        - { name: rgb_vector, type: float[], facet: false, sort: false, num_dim: 3, vec_dist: cosine }

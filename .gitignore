@@ -1,0 +1,11 @@
+/silverstripe-cache/
+/.env
+/vendor/
+/themes/simple/
+/_resources/
+/public/_resources/
+/.graphql-generated/
+/public/_graphql/
+resene.csv
+data
+typesense-data

@@ -1,0 +1,12 @@
+ElliotSawyer\SilverstripeTypesense\Typesense:
+  collections:
+    ElliotSawyer\TypesenseSearch\ScopedSearch\SharedDocument:
+      name: SharedDocuments
+      fields:
+        - { name: Title, type: string, sort: true }
+        - { name: Content, type: string, optional: true }
+        - { name: Link, type: string, index: false, optional: true}
+        - { name: OwnerID, type: int32[], index: true, optional: false, sort: false}
+SilverStripe\Security\Member:
+  extensions:
+    - ElliotSawyer\TypesenseSearch\ScopedSearch\MemberExtension

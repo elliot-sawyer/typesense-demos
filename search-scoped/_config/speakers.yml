@@ -1,0 +1,35 @@
+ElliotSawyer\TypesenseSearch\ScopedSearch\SetupScopedSearch:
+  speakers:
+    - { FirstName: 'Andy', Surname: 'Wong', Email: 'andy.wong@example.com' }
+    - { FirstName: 'Anna', Surname: 'Lezhikova', Email: 'anna.lezhikova@example.com' }
+    - { FirstName: 'Chris', Surname: 'Smith', Email: 'chris.smith@example.com' }
+    - { FirstName: 'Daniel', Surname: 'Shannon', Email: 'daniel.shannon@example.com' }
+    - { FirstName: 'Dean', Surname: 'Pemberton', Email: 'dean.pemberton@example.com' }
+    - { FirstName: 'Edward', Surname: 'Abad', Email: 'edward.abad@example.com' }
+    - { FirstName: 'Elliot', Surname: 'Sawyer', Email: 'elliot.sawyer@example.com' }
+    - { FirstName: 'Georgina', Surname: 'Vertongen', Email: 'georgina.vertongen@example.com' }
+    - { FirstName: 'Ingo', Surname: 'Schommer', Email: 'ingo.schommer@example.com' }
+    - { FirstName: 'James', Surname: 'Harton', Email: 'james.harton@example.com' }
+    - { FirstName: 'Joel', Surname: 'Norris', Email: 'joel.norris@example.com' }
+    - { FirstName: 'Kade', Surname: 'Morton', Email: 'kade.morton@example.com' }
+    - { FirstName: 'Kai', Surname: 'Koenig', Email: 'kai.koenig@example.com' }
+    - { FirstName: 'Katrina', Surname: 'Clokie', Email: 'katrina.clokie@example.com' }
+    - { FirstName: 'Kay', Surname: 'Ward', Email: 'kay.ward@example.com' }
+    - { FirstName: 'Lexi', Surname: 'Weng', Email: 'lexi.weng@example.com' }
+    - { FirstName: 'Maarten', Surname: 'Idema', Email: 'maarten.idema@example.com' }
+    - { FirstName: 'Magdeline', Surname: 'Huang', Email: 'magdeline.huang@example.com' }
+    - { FirstName: 'Maia', Surname: 'Miller', Email: 'maia.miller@example.com' }
+    - { FirstName: 'Matthew', Surname: 'Dekker', Email: 'matthew.dekker@example.com' }
+    - { FirstName: 'Mehuli', Surname: 'Mukherjee', Email: 'mehuli.mukherjee@example.com' }
+    - { FirstName: 'Moiz', Surname: 'Penkar', Email: 'moiz.penkar@example.com' }
+    - { FirstName: 'Prae', Surname: 'Songprasit', Email: 'prae.songprasit@example.com' }
+    - { FirstName: 'Rachel', Surname: 'Collingridge', Email: 'rachel.collingridge@example.com' }
+    - { FirstName: 'Rebecca', Surname: 'Cato', Email: 'rebecca.cato@example.com' }
+    - { FirstName: 'Rob', Surname: 'King', Email: 'rob.king@example.com' }
+    - { FirstName: 'Roberto', Surname: 'Allende', Email: 'roberto.allende@example.com' }
+    - { FirstName: 'Sam', Surname: 'Jarman', Email: 'sam.jarman@example.com' }
+    - { FirstName: 'Simon', Surname: 'Merrick', Email: 'simon.merrick@example.com' }
+    - { FirstName: 'Steve', Surname: 'Barnett', Email: 'steve.barnett@example.com' }
+    - { FirstName: 'Thong', Surname: 'Kuah', Email: 'thong.kuah@example.com' }
+    - { FirstName: 'Xiaodi', Surname: 'Yan', Email: 'xiaodi.yan@example.com' }
+    - { FirstName: 'Yuri', Surname: 'Liu', Email: 'yuri.liu@example.com' }

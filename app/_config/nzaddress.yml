@@ -1,0 +1,4 @@
+ElliotSawyer\NZStreets\NZStreetAddress:
+  db:
+    AddressNumberPrefix: Varchar(100)
+    TerritorialAuthority: Varchar(64)

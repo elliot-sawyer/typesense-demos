@@ -1,0 +1,26 @@
+ElliotSawyer\SilverstripeTypesense\Typesense:
+  collections:
+    Page:
+      name: Pages
+      fields:
+        - { name: Title, type: string, sort: true }
+        - { name: Content, type: string, optional: true }
+        - { name: Link, type: string, index: false, optional: true}
+        - { name: Tags, type: string[], facet: true, optional: true, sort: false}
+      default_sorting_field:
+      token_separators:
+      symbols_to_index:
+      excluded_classes:
+        - SilverStripe\ErrorPage\ErrorPage
+        - SilverStripe\CMS\Model\RedirectorPage
+        - ElliotSawyer\TypesenseSearch\ScopedSearch\SharedDocument
+SilverStripe\SiteConfig\SiteConfig:
+  extensions:
+    typesense: ElliotSawyer\TypesenseSearch\CodeCamp\TypesenseSiteConfig
+---
+Name: typesense-ssl-dev
+Only:
+  environment: dev
+---
+ElliotSawyer\SilverstripeTypesense\Typesense:
+  disable_ssl_verification: true
