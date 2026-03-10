@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <% require themedCSS("dist/css/main") %>
   </head>
-  <body>
+  <body class="$ClassName.ShortName" $DataAttributes.RAW>
     <main>
 	$Layout
     </main>

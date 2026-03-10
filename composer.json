@@ -21,7 +21,8 @@
     },
     "extra": {
         "expose": [
-            "themes/codecamp/dist"
+            "themes/codecamp/dist",
+            "search-resene/templates/client"
         ],
         "project-files-installed": [
             ".htaccess",

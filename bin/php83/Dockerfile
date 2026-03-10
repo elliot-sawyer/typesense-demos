@@ -64,12 +64,24 @@ libpng-dev && \
     docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg && \
     docker-php-ext-install gd
 
-# Insure an SSL directory exists
 RUN mkdir -p /etc/apache2/ssl
 
+RUN echo "<VirtualHost *:443>" > /etc/apache2/sites-available/ssl.conf
+RUN echo "  DocumentRoot /var/www/html/" >> /etc/apache2/sites-available/ssl.conf
+RUN echo "  ServerName localhost" >> /etc/apache2/sites-available/ssl.conf
+RUN echo "  SSLEngine on" >> /etc/apache2/sites-available/ssl.conf
+RUN echo "  SSLCertificateFile /etc/apache2/ssl/server.crt" >> /etc/apache2/sites-available/ssl.conf
+RUN echo "  SSLCertificateKeyFile /etc/apache2/ssl/server.key" >> /etc/apache2/sites-available/ssl.conf
+RUN echo "  # --- Typesense reverse proxy ---" >> /etc/apache2/sites-available/ssl.conf
+RUN echo "  ProxyPreserveHost On" >> /etc/apache2/sites-available/ssl.conf
+RUN echo "  ProxyPass        /_typesense/ http://typesense:8108/" >> /etc/apache2/sites-available/ssl.conf
+RUN echo "  ProxyPassReverse /_typesense/ http://typesense:8108/" >> /etc/apache2/sites-available/ssl.conf
+RUN echo "</VirtualHost>\n" >> /etc/apache2/sites-available/ssl.conf
 
 # Enable apache modules
-RUN a2enmod ssl rewrite headers
+RUN a2enmod ssl rewrite headers proxy proxy_http
+
+
 
 
 # Enable SSL
@@ -78,7 +90,6 @@ RUN apt update && \
         zlib1g-dev && \
     mkdir -p /etc/apache2/ssl && \
     openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/apache2/ssl/server.key -out /etc/apache2/ssl/server.crt --batch && \
-    printf "<VirtualHost *:443>\n\tDocumentRoot /var/www/html/\n\tServerName localhost\n\tSSLEngine on\n\tSSLCertificateFile /etc/apache2/ssl/server.crt\n\tSSLCertificateKeyFile /etc/apache2/ssl/server.key\n</VirtualHost>\n" > /etc/apache2/sites-available/ssl.conf && \
     a2ensite ssl && \
     service apache2 restart
 
