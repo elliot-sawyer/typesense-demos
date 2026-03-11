@@ -7,5 +7,7 @@
 /.graphql-generated/
 /public/_graphql/
 resene.csv
+Suburb.csv
+nzstreets.sql
 data
 typesense-data

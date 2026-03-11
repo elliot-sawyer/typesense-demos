@@ -9,8 +9,8 @@ use SilverStripe\View\Requirements;
 class TypesenseSearchPageController extends PageController
 {
     private static $alternate_typesense_host = null;
-    private static $instantsearch_cdn = 'https://cdn.jsdelivr.net/npm/instantsearch.js@4.44.0';
-    private static $instantsearch_typesense_cdn = 'https://cdn.jsdelivr.net/npm/typesense-instantsearch-adapter@2/dist/typesense-instantsearch-adapter.min.js';
+    private static $instantsearch_cdn = 'https://cdn.jsdelivr.net/npm/instantsearch.js@4';
+    private static $instantsearch_typesense_cdn = 'https://cdn.jsdelivr.net/npm/typesense-instantsearch-adapter@3/dist/typesense-instantsearch-adapter.min.js';
     public function init()
     {
         parent::init();

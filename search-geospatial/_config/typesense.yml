@@ -1,11 +1,16 @@
-# ElliotSawyer\SilverstripeTypesense\Typesense:
-#   collections:
-#     ElliotSawyer\NZStreets\NZStreetAddress:
-#       name: Addresses
-#       fields:
-#         - { name: AddressID, type: int32}
-#         - { name: SuburbLocality, type: string, facet: true, sort: false }
-#         - { name: TownCity, type: string, facet: true, sort: false  }
-#         - { name: FullAddress, type: string}
-#       import_limit: 50000
-#       connection_timeout: 60
+ElliotSawyer\SilverstripeTypesense\Typesense:
+  collections:
+    ElliotSawyer\NZStreets\NZStreetAddress:
+      name: Addresses
+      fields:
+        - { name: Region, type: string, facet: true, sort: false, optional: true }
+        - { name: Council, type: string, facet: true, sort: false, optional: true }
+        - { name: City, type: string, facet: true, sort: false, optional: true }
+        - { name: Suburb, type: string, facet: true, sort: false, optional: true }
+        - { name: FullAddress, type: string}
+        - { name: Location, type: geopoint}
+      import_limit: 100000
+      connection_timeout: 60
+ElliotSawyer\NZStreets\NZStreetAddress:
+  extensions:
+    - ElliotSawyer\TypesenseSearch\Geospatial\NZStreetExtension
