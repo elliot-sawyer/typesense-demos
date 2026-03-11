@@ -1,0 +1,19 @@
+SilverStripe\Core\Injector\Injector:
+  Psr\SimpleCache\CacheInterface.Audiobook:
+    factory: SilverStripe\Core\Cache\CacheFactory
+    constructor:
+      namespace: "Audiobook"
+SilverStripe\Assets\File:
+  allowed_extensions:
+    - vtt
+    - tsv
+  app_categories:
+    document:
+    - vtt
+    - tsv
+---
+After: '#basicmimetypes'
+---
+SilverStripe\Control\HTTP:
+  MimeTypes:
+    tsv: text/plain

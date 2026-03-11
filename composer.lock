@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d452efd01a69b926842311d657f9c932",
+    "content-hash": "a5abdd95cccb49300792af06c8e90e35",
     "packages": [
         {
             "name": "asyncphp/doorman",
@@ -2911,6 +2911,55 @@
                 }
             ],
             "time": "2024-03-02T06:30:58+00:00"
+        },
+        {
+            "name": "silvershop/silverstripe-hasonefield",
+            "version": "4.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/silvershop/silverstripe-hasonefield.git",
+                "reference": "f2a45adb26fcaead4a206c3b149a118c70abe662"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/silvershop/silverstripe-hasonefield/zipball/f2a45adb26fcaead4a206c3b149a118c70abe662",
+                "reference": "f2a45adb26fcaead4a206c3b149a118c70abe662",
+                "shasum": ""
+            },
+            "require": {
+                "silverstripe/framework": "^4.0 || ^5.0",
+                "silverstripe/vendor-plugin": "^1.0 || ^2.0"
+            },
+            "replace": {
+                "hchokshi/silverstripe-hasonefield": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.7"
+            },
+            "type": "silverstripe-vendormodule",
+            "extra": {
+                "expose": [
+                    "client"
+                ],
+                "branch-alias": {
+                    "dev-main": "4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "SilverShop\\HasOneField\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "description": "Edit a has_one relationship using a GridField, triggered by clicking a button.",
+            "support": {
+                "issues": "https://github.com/silvershop/silverstripe-hasonefield/issues",
+                "source": "https://github.com/silvershop/silverstripe-hasonefield/tree/4.1.0"
+            },
+            "time": "2025-04-14T09:20:41+00:00"
         },
         {
             "name": "silverstripe/admin",

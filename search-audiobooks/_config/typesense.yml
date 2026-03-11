@@ -1,0 +1,11 @@
+ElliotSawyer\SilverstripeTypesense\Typesense:
+  collections:
+    ElliotSawyer\TypesenseSearch\AudiobookSearch\AudiobookLine:
+      name: Audiobooks
+      # default_sorting_field: Start
+      fields:
+        - { name: Title, type: string, sort: false, facet: true }
+        - { name: Author, type: string, sort: false, facet: true }
+        - { name: Start, type: int32, sort: true }
+        - { name: Stop, type: int32, sort: true }
+        - { name: Body, type: string }
