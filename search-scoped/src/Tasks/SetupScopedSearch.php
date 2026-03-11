@@ -53,11 +53,11 @@ class SetupScopedSearch extends BuildTask
      */
     protected function createParentPage(): Page
     {
-        $page = Page::get()->filter(['Title' => 'Shared Documents', 'ParentID' => 0])->first();
+        $page = Page::get()->filter(['Title' => 'Scoped Search', 'ParentID' > 0])->first();
 
         if (!$page) {
             $page = Page::create();
-            $page->Title = 'Shared Documents';
+            $page->Title = 'Scoped Search';
             $page->Content = '<p>This section contains documents shared with specific users.</p>';
             $page->publishSingle();
         }
