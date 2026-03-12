@@ -1,14 +1,10 @@
     <div class="container-fluid">
-        <div class="row my-3">
-            <div class="col-12">
-                <h1>NZ Addresses Search</h1>
-                <p class="text-muted">Explore New Zealand addresses with geospatial search powered by Typesense</p>
-            </div>
-        </div>
-
         <div class="row">
             <!-- Left column - Search and Results -->
             <div class="col-md-3">
+                <h1>NZ Addresses Search</h1>
+                <p class="text-muted">Explore New Zealand addresses with geospatial search powered by Typesense</p>
+
                 <div class="left-column-wrapper">
                     <div id="searchbox"></div>
 

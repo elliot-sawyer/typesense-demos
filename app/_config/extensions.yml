@@ -1,0 +1,3 @@
+SilverStripe\SiteConfig\SiteConfig:
+  extensions:
+    theme: ElliotSawyer\TypesenseSearch\CodeCamp\BootswatchExtension

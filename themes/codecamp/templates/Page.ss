@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>$SiteConfig.Title</title>
     <!-- Bootstrap CSS -->
-    <% require themedCSS("dist/css/main") %>
+    $SiteConfig.BootswatchTheme
+    <%-- require themedCSS("dist/css/main") --%>
   </head>
   <body class="$ClassName.ShortName" $DataAttributes.RAW>
     <main>

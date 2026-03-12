@@ -33,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const search = instantsearch({
         searchClient,
         indexName: searchCollection,
-        routing: true
     });
 
     // Global variables for map and markers
@@ -121,6 +120,9 @@ document.addEventListener('DOMContentLoaded', () => {
             searchable: false,
             showMore: false,
             limit: 25,
+            cssClasses: {
+                count: 'mx-4 badge rounded-pill text-bg-primary'
+            },
             transformItems(items) {
                 const container = document.getElementById('facet-region-container');
                 if (container) {
@@ -137,6 +139,9 @@ document.addEventListener('DOMContentLoaded', () => {
             searchable: false,
             showMore: false,
             limit: 25,
+            cssClasses: {
+                count: 'mx-4 badge rounded-pill text-bg-primary'
+            },
             transformItems(items) {
                 const container = document.getElementById('facet-council-container');
                 if (container) {
@@ -153,6 +158,9 @@ document.addEventListener('DOMContentLoaded', () => {
             searchable: false,
             showMore: false,
             limit: 25,
+            cssClasses: {
+                count: 'mx-4 badge rounded-pill text-bg-primary'
+            },
             transformItems(items) {
                 const container = document.getElementById('facet-city-container');
                 if (container) {
@@ -169,6 +177,9 @@ document.addEventListener('DOMContentLoaded', () => {
             searchable: false,
             showMore: false,
             limit: 25,
+            cssClasses: {
+                count: 'mx-4 badge rounded-pill text-bg-primary'
+            },
             transformItems(items) {
                 const container = document.getElementById('facet-suburb-container');
                 if (container) {

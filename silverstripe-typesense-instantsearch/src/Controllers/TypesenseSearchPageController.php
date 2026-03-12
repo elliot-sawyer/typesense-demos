@@ -58,37 +58,4 @@ class TypesenseSearchPageController extends PageController
             ?: Environment::getEnv('TYPESENSE_SEARCH_KEY');
     }
 
-    public function HeroImageCSS()
-    {
-        $css = sprintf(".%s .jumbotron.hero-image:before {
-                content: '';
-                position: absolute;
-                inset: 0;
-                z-index: -1;
-                backdrop-filter: blur(20px);
-                animation: blurry 3s infinite alternate;
-            }
-            .%s .jumbotron.hero-image{
-                position:relative;
-                overflow: hidden;
-                backdrop-filter: blur(20px);
-                animation: blurry 5s infinite alternate;
-            }
-            @keyframes blurry {
-                from {
-                    backdrop-filter: blur(15px);
-                }
-
-                to {
-                    backdrop-filter: blur(30px);
-                }
-            }
-            ",
-            $this->dbObject('ClassName')->ShortName,
-            $this->dbObject('ClassName')->ShortName,
-        );
-        Requirements::customCSS($css);
-        parent::HeroImageCSS();
-    }
-
 }

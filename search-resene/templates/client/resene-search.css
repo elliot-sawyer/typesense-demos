@@ -5,7 +5,7 @@
 }
 
 .resene-search-container {
-    background: white;
+
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     margin-bottom: 20px;
 }
@@ -19,7 +19,7 @@
 .search-mode-btn {
     padding: 10px 20px;
     border: 2px solid #ddd;
-    background: white;
+
     border-radius: 4px;
     cursor: pointer;
     font-size: 14px;
@@ -67,7 +67,7 @@
 }
 
 .results-container {
-    background: white;
+
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -167,6 +167,9 @@
     display: none;
 }
 
+#searchbox {
+    position: relative;
+}
 #searchbox:before {
     content: '';
     position: absolute;

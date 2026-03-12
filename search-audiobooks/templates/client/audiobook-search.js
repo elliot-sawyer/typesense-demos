@@ -25,7 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const typesenseInstantsearchAdapter = new TypesenseInstantSearchAdapter({
         server: TYPESENSE_CONFIG,
         additionalSearchParameters: {
-            query_by: 'Body'
+            query_by: 'Body',
+            sort_by: 'Start:asc'
         }
     });
 
@@ -58,6 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         instantsearch.widgets.hits({
             container: '#audiobook-hits',
+            cssClasses: {
+                list: 'list-unstyled'
+            },
             templates: {
                 item(hit) {
                     const hex = hit.Hex || '#000000';
