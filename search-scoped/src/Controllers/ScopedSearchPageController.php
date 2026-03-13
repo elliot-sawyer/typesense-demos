@@ -11,15 +11,17 @@ class ScopedSearchPageController extends TypesenseSearchPageController
     public function init()
     {
         parent::init();
-        $member = Security::getCurrentUser();
+        if(!($member = Security::getCurrentUser())) {
+            return;
+        }
         $parentKey = $this->data()->SearchAPIKey;
         if($member && !$member->TypesenseAPISearchKey) {
             $client = Typesense::client();
             $expiry = strtotime("+24 hours");
 
-            if(!$member->TypesenseAPISearchKeyExpires || $member->TypesenseAPISearchKeyExpires > DBDatetime::now()) {
+            if(!$member->TypesenseAPISearchKey || $member->TypesenseAPISearchKeyExpires > DBDatetime::now()) {
                 $scopedKey = $client->keys->generateScopedSearchKey($parentKey, [
-                    'filter_by' => 'OwnerID:'.$member->ID,
+                    'filter_by' => 'Owner.ID:'.$member->ID,
                     'expires_at' => $expiry
                 ]);
                 if($scopedKey) {
@@ -31,4 +33,5 @@ class ScopedSearchPageController extends TypesenseSearchPageController
 
         }
     }
+
 }

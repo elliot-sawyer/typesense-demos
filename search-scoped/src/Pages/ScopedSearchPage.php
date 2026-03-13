@@ -30,7 +30,7 @@ class ScopedSearchPage extends TypesenseSearchPage
            'hostname' => $siteConfig->TypesenseHostname,
            'port' => $siteConfig->TypesensePort,
            'path' => $siteConfig->TypesensePath,
-           'apikey' => $member->TypesenseAPISearchKey,
+           'apikey' => $member?->TypesenseAPISearchKey,
            'collection' => $this->Collection()->Name,
            'queryfields' => $this->SelectedQueryFields ? implode(',', json_decode($this->SelectedQueryFields ?? '')) : null,
            'facetfields' => $this->SelectedFacetFields ? implode(',', json_decode($this->SelectedFacetFields ?? '')) : null,

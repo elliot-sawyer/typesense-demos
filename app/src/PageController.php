@@ -55,7 +55,7 @@ namespace {
                         backdrop-filter: blur(20px);
                         animation: blurry 3s infinite alternate;
                     }
-                    .%s .jumbotron.hero-image{
+                    .%s .jumbotron.hero-image {
                         position:relative;
                         overflow: hidden;
                         backdrop-filter: blur(20px);

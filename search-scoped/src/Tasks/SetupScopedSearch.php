@@ -24,6 +24,7 @@ class SetupScopedSearch extends BuildTask
     public function run($request = null)
     {
         $this->makeMembers();
+        $this->clearMemberKeys();
         $parent = $this->createParentPage();
         $this->createSharedDocuments($parent);
     }
@@ -53,10 +54,11 @@ class SetupScopedSearch extends BuildTask
      */
     protected function createParentPage(): Page
     {
-        $page = Page::get()->filter(['Title' => 'Scoped Search', 'ParentID' > 0])->first();
-
-        if (!$page) {
-            $page = Page::create();
+        $parent = Page::get()->find('Title', 'Demos');
+        $parentID = $parent->ID;
+        $page = ScopedSearchPage::get()->filter(['Title' => 'Scoped Search', 'ParentID' => $parentID])->first();
+        if (!($page && $page->ID)) {
+            $page = ScopedSearchPage::create();
             $page->Title = 'Scoped Search';
             $page->Content = '<p>This section contains documents shared with specific users.</p>';
             $page->publishSingle();
@@ -72,7 +74,7 @@ class SetupScopedSearch extends BuildTask
      * @param \SilverStripe\ORM\DataList $members
      * @return \SilverStripe\ORM\DataList
      */
-    protected function createSharedDocuments(Page $parent)
+    protected function createSharedDocuments(ScopedSearchPage $parent)
     {
         $loremIpsum = [
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
@@ -87,32 +89,48 @@ class SetupScopedSearch extends BuildTask
             'Malesuada fames ac turpis egestas sed tempus urna et pharetra.',
         ];
 
-        for ($i = 1; $i <= 100; $i++) {
+        for ($i = 1; $i <= 67; $i++) {
             shuffle($loremIpsum);
             $title = "Document " . str_pad($i, 3, '0', STR_PAD_LEFT);
             $opts = ['Title' => $title, 'ParentID' => $parent->ID, 'CanViewType' => 'OnlyTheseMembers'];
             $page = SharedDocument::get()->filter($opts)->first();
-
+            if($page && $page->ID && $page->ViewerMembers()->Count() == 0) {
+                dd($page->ID, $page->$page->ViewerMembers()->Count());
+                continue;
+            }
             $rnd = random_int(2, 5);
             $members = Group::get()->find('Title', 'Demo users')
                 ->Members()
                 ->shuffle()
                 ->limit($rnd);
             $content = array_slice($loremIpsum, 0, $rnd);
-            if (!($page && $page->ID)) {
-                $page = SharedDocument::create();
-                foreach($members as $owner) {
-                    $page->ViewerMembers()->add($owner);
-                }
-                $page->Title = $title;
-                $page->Content = implode(' ', $content);
-                $page->CanViewType = 'OnlyTheseMembers';
-                $page->ParentID = $parent->ID;
 
-                $page->publishSingle();
-                DB::alteration_message('...published '.$page->Title . ' to parent ' . $parent->Title);
+            $page = SharedDocument::create();
+            foreach($members as $owner) {
+                $page->ViewerMembers()->add($owner);
             }
+            $page->Title = $title;
+            $page->Content = implode(' ', $content);
+            $page->CanViewType = 'OnlyTheseMembers';
+            $page->ParentID = $parent->ID;
+
+            $page->publishSingle();
+            DB::alteration_message('...published '.$page->Title . ' to parent ' . $parent->Title);
         }
         DB::alteration_message($i . ' shared documents loaded');
+    }
+
+    public function clearMemberKeys()
+    {
+        $group = Group::get()->find('Title', 'Demo users')
+            ?: Group::create(['Title' => 'Demo users']);
+        $members = $group->Members();
+        foreach($members as $member) {
+            $member->TypesenseAPISearchKey = null;
+            $member->TypesenseAPISearchKeyExpires = null;
+            $member->write();
+        }
+
+        DB::alteration_message('Cleared existing scoped search keys');
     }
 }

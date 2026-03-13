@@ -2,11 +2,15 @@ ElliotSawyer\SilverstripeTypesense\Typesense:
   collections:
     ElliotSawyer\TypesenseSearch\ScopedSearch\SharedDocument:
       name: SharedDocuments
+      enable_nested_fields: true
       fields:
         - { name: Title, type: string, sort: true }
         - { name: Content, type: string, optional: true }
         - { name: Link, type: string, index: false, optional: true}
-        - { name: OwnerID, type: int32[], index: true, optional: false, sort: false}
+        - { name: Owner.ID, type: int32[], index: true, optional: false, sort: false}
+        - { name: Owner.Name, type: string[], facet: true, index: true, optional: false, sort: false}
+        - { name: Owner.Email, type: string[], facet: false, index: false, optional: false, sort: false}
+
 SilverStripe\Security\Member:
   extensions:
     - ElliotSawyer\TypesenseSearch\ScopedSearch\MemberExtension
