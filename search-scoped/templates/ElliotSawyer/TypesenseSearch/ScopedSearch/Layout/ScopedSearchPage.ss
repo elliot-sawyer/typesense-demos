@@ -9,16 +9,23 @@
         </div>
     </div>
     <div class="row">
-        <div class="col">
-            <div id="scopedsearch">
-                <div id="scoped-searchbox">
-                </div>
+        <div class="col-12">
+            <div id="scoped-searchbox">
+            </div>
+        </div>
 
+        <div class="row">
+            <div class="col-3">
+                <h3>Owners</h3>
+                <div id="refinementList-Owners"></div>
+            </div>
+            <div class="col-9">
                 <p>A scoped key has been issued for your user for this page.  You are only able to search on content that you have access to.</p>
                 <div id="scoped-hits">
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 <% require javascript("search-scoped/templates/client/dist/scoped.js") %>

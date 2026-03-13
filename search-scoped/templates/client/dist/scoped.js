@@ -43,6 +43,24 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 loadingIcon: 'stroke-primary',
             },
         }),
+        instantsearch.widgets.refinementList({
+            container: '#refinementList-Owners',
+            attribute: 'Owner.Name',
+            searchable: false,
+            showMore: false,
+            limit: 33,
+            operator: 'and',
+            cssClasses: {
+                searchableInput: 'form-control form-control-sm mb-2',
+                searchableSubmit: 'd-none',
+                searchableReset: 'd-none',
+                showMore: 'btn btn-secondary btn-sm',
+                list: 'list-unstyled',
+                count: 'mx-2',
+                label: 'd-flex align-items-center m-1',
+                checkbox: 'mx-2',
+            },
+        }),
         instantsearch.widgets.infiniteHits({
             container: '#scoped-hits',
             cssClasses: {
