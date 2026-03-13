@@ -1,11 +1,10 @@
 <div class="container">
     <div class="row m-4">
-        <div class="col-10">
-            You are logged in as <strong>$CurrentUser.FirstName $CurrentUser.Surname</strong>.  Only you can view your own documents.
-        </div>
-
-        <div class="col-2">
-            <a class="btn btn-primary" href="/Security/logout?SecurityID=$SecurityID&BackURL=$Parent.Link">Log in as someone else</a>
+        <div class="col-12">
+            <p>You are logged in as <strong>$CurrentUser.Name</strong>.
+            A scoped key has been issued for your user for this page.  You are only able to search on content that you have access to.
+            You can view your own documents and those that have been shared with you.
+            </p>
         </div>
     </div>
     <hr />
