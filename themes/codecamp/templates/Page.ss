@@ -7,14 +7,14 @@
     <title>$SiteConfig.Title</title>
     <!-- Bootstrap CSS -->
     $SiteConfig.BootswatchTheme
-    <%-- require themedCSS("dist/css/main") --%>
+    <% require themedCSS("dist/css/codecamp") %>
   </head>
   <body class="$ClassName.ShortName" $DataAttributes.RAW>
     <% include Navbar %>
     <main>
 	$Layout
     </main>
-    <% require themedJavascript("dist/js/main") %>
+    <% require themedJavascript("dist/js/codecamp") %>
 
   </body>
 </html>
