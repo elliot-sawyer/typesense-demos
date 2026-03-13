@@ -186,4 +186,9 @@ class TypesenseSearchPage extends Page
 
         return $out;
     }
+
+    public function IsSearchPage()
+    {
+        return $this instanceof TypesenseSearchPage;
+    }
 }
