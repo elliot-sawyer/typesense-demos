@@ -10,6 +10,7 @@
     <%-- require themedCSS("dist/css/main") --%>
   </head>
   <body class="$ClassName.ShortName" $DataAttributes.RAW>
+    <% include Navbar %>
     <main>
 	$Layout
     </main>

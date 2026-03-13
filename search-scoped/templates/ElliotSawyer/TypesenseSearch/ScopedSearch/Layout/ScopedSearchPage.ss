@@ -1,3 +1,4 @@
+<% if CurrentUser %>
 <div class="container">
     <div class="row m-4">
         <div class="col-10">
@@ -29,3 +30,11 @@
 </div>
 </div>
 <% require javascript("search-scoped/templates/client/dist/scoped.js") %>
+<% else  %>
+<div class="alert alert-primary">You need to sign in to use this demo.  All speakers have an account.<br/>
+    <ul>
+        <li><strong>User:</strong>:firstname.lastname@example.com</li>
+        <li><strong>Pass:</strong>:Test00!!</li>
+    </ul>
+</div>
+<% end_if %>
