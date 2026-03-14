@@ -29,6 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const searchClient = typesenseAdapter.searchClient;
 
+    // Initialize Typesense Client for direct queries
+    const typesenseClient = new Typesense.Client(TYPESENSE_CONFIG);
+
     // Initialize InstantSearch
     const search = instantsearch({
         searchClient,
@@ -39,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let map;
     let markersLayer;
     let allMarkers = [];
+    let suburbPolylineLayer;
 
     // Initialize Leaflet map
     function initMap() {
@@ -53,6 +57,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Create a layer group for markers
         markersLayer = L.layerGroup().addTo(map);
+
+        // Create a layer group for suburb polylines
+        suburbPolylineLayer = L.layerGroup().addTo(map);
     }
 
     // Update map markers based on search results
@@ -91,6 +98,48 @@ document.addEventListener('DOMContentLoaded', () => {
         if (allMarkers.length > 0) {
             const group = new L.featureGroup(allMarkers);
             map.fitBounds(group.getBounds().pad(0.1));
+        }
+    }
+
+    // Function to fetch and display suburb polyline
+    async function displaySuburbPolyline(suburbName, cityName, councilName) {
+        // Clear existing polylines
+        suburbPolylineLayer.clearLayers();
+
+        if (!suburbName || !cityName || !councilName) {
+            return;
+        }
+
+        try {
+            // Query the suburbs collection
+            const searchParameters = {
+                q: '*',
+                query_by: 'suburb.name',
+                filter_by: `suburb.name:=${suburbName} && city.name:=${cityName} && council.name:=${councilName}`,
+                per_page: 1
+            };
+
+            const results = await typesenseClient.collections('suburbs').documents().search(searchParameters);
+
+            if (results.hits && results.hits.length > 0) {
+                const encodedPolyline = results.hits[0].document.polyline;
+                if(encodedPolyline && typeof encodedPolyline === 'string') {
+                    const decoded = polyline.decode(encodedPolyline);
+                    const polygon = L.polygon(decoded, {
+                        color: '#4854D3',
+                        weight: 3,
+                        opacity: 1,
+                        fillColor: '#4854D3',
+                        fillOpacity: 0.15,
+                        interactive: false
+                    });
+                    // Add to the polyline layer
+                    suburbPolylineLayer.addLayer(polygon);
+                    map.fitBounds(polygon.getBounds().pad(0.1));
+                }
+            }
+        } catch (error) {
+            console.error('Error fetching suburb polyline:', error);
         }
     }
 
@@ -241,6 +290,55 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Start InstantSearch
     search.start();
+
+    // Listen for refinement changes to display suburb polyline
+    search.on('render', function() {
+        const renderState = search.renderState[searchCollection];
+
+        if (renderState && renderState.refinementList) {
+            const suburbRefinements = renderState.refinementList.Suburb;
+            const cityRefinements = renderState.refinementList.City;
+            const councilRefinements = renderState.refinementList.Council;
+
+            // Check if exactly one suburb is selected
+            if (suburbRefinements && suburbRefinements.items) {
+                const selectedSuburbs = suburbRefinements.items.filter(item => item.isRefined);
+
+                if (selectedSuburbs.length === 1) {
+                    const suburbName = selectedSuburbs[0].value;
+
+                    // Get selected city and council
+                    let cityName = null;
+                    let councilName = null;
+
+                    if (cityRefinements && cityRefinements.items) {
+                        const selectedCities = cityRefinements.items.filter(item => item.isRefined);
+                        if (selectedCities.length === 1) {
+                            cityName = selectedCities[0].value;
+                        }
+                    }
+
+                    if (councilRefinements && councilRefinements.items) {
+                        const selectedCouncils = councilRefinements.items.filter(item => item.isRefined);
+                        if (selectedCouncils.length === 1) {
+                            councilName = selectedCouncils[0].value;
+                        }
+                    }
+
+                    // Display the suburb polyline
+                    if (cityName && councilName) {
+                        displaySuburbPolyline(suburbName, cityName, councilName);
+                    }
+                } else {
+                    // Clear polyline if no suburb or multiple suburbs selected
+                    suburbPolylineLayer.clearLayers();
+                }
+            } else {
+                // Clear polyline if no suburb facet
+                suburbPolylineLayer.clearLayers();
+            }
+        }
+    });
 
     // Add click event delegation for hit items
     document.addEventListener('click', function(e) {

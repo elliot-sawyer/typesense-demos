@@ -46,10 +46,9 @@
             </div>
         </div>
     </div>
-<%-- <% require javascript(https://cdn.jsdelivr.net/npm/instantsearch.js@4) %>
-<% require javascript(https://cdn.jsdelivr.net/npm/typesense-instantsearch-adapter@2/dist/typesense-instantsearch-adapter.min.js) %> --%>
 <% require javascript('search-geospatial/templates/client/leaflet.js') %>
 <% require javascript('search-geospatial/templates/client/typesense.js') %>
+<% require javascript('search-geospatial/templates/client/polyline.js') %>
 <% require javascript('search-geospatial/templates/client/geo.js') %>
 <% require css('search-geospatial/templates/client/geo.css') %>
 <% require css('search-geospatial/templates/client/leaflet.css') %>
