@@ -4,12 +4,10 @@ services:
   webserver:
     build:
       context: ./bin/${PHPVERSION}
-    container_name: "${COMPOSE_PROJECT_NAME}-${PHPVERSION}"
-    restart: "always"
     ports:
       - "${HOST_MACHINE_SECURE_HOST_PORT}:443"
     links:
-      - database
+      - db
       - typesense
     volumes:
      - ${DOCUMENT_ROOT-./www}:/var/www/html:rw
@@ -21,33 +19,29 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       HOST_MACHINE_MYSQL_PORT: ${HOST_MACHINE_MYSQL_PORT}
-      XDEBUG_CONFIG: "client_host=host.docker.internal remote_port=${XDEBUG_PORT}"
     extra_hosts:
       - "host.docker.internal:host-gateway"
-  database:
-    build:
-      context: "./bin/${DATABASE}"
-    container_name: "${COMPOSE_PROJECT_NAME}-${DATABASE}"
+  db:
+    image: mariadb:12
     restart: "always"
     ports:
       - "127.0.0.1:${HOST_MACHINE_MYSQL_PORT}:3306"
     volumes:
       - ${MYSQL_INITDB_DIR-./config/initdb}:/docker-entrypoint-initdb.d
-      - ${MYSQL_DATA_DIR-./data/mysql}:/var/lib/mysql
-      - ${MYSQL_LOG_DIR-./data/logs/mysql}:/var/log/mysql
+      #- ${MYSQL_DATA_DIR-./data/mysql}:/var/lib/mysql
+      #- ${MYSQL_LOG_DIR-./data/logs/mysql}:/var/log/mysql
       - /mnt/02D29E06D29DFDDB/Downloads/nz-addresses-CSV:/root
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-  phpmyadmin:
+  pma:
     image: phpmyadmin
-    container_name: "${COMPOSE_PROJECT_NAME}-phpmyadmin"
     links:
-      - database
+      - db
     environment:
-      PMA_HOST: database
+      PMA_HOST: db
       PMA_PORT: 3306
       PMA_USER: root
       PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD}
@@ -64,7 +58,6 @@ services:
       - ${PHP_INI-./config/php/php.ini}:/usr/local/etc/php/conf.d/php-phpmyadmin.ini
   typesense:
     image: typesense/typesense:30.1
-    restart: on-failure
     ports:
 #      - "8443:443"
       - "${HOST_MACHINE_TYPESENSE_PORT}:8108"

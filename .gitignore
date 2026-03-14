@@ -13,3 +13,4 @@ data
 typesense-data
 JaneEyre.tsv
 themes/codecamp/dist/css/*.min.css
+/public/assets
