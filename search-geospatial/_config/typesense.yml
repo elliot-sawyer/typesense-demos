@@ -11,7 +11,7 @@ ElliotSawyer\SilverstripeTypesense\Typesense:
         - { name: Location, type: geopoint}
       import_limit: 100000
       connection_timeout: 60
-      enable_nested_fields: true
+      enable_nested_fields: false
 ElliotSawyer\NZStreets\NZStreetAddress:
   extensions:
     - ElliotSawyer\TypesenseSearch\Geospatial\NZStreetExtension
