@@ -33,7 +33,7 @@ class TypesenseSearchPage extends Page
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
-        $fields->removeByName(['CollectionID', 'Content', 'SelectedQueryFields', 'SelectedFacetFields', 'SelectedSortFields']);
+        $fields->removeByName(['CollectionID', 'SelectedQueryFields', 'SelectedFacetFields', 'SelectedSortFields']);
         $fields->addFieldToTab(
             'Root.Main',
             DropdownField::create(

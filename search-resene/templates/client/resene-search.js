@@ -231,7 +231,20 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="colour-info">
                             <div class="colour-name">${doc.Name}</div>
                             <div class="colour-code">Code: ${doc.Code}</div>
-                            <div class="colour-hex">Hex: ${hexColor} | RGB: ${doc.Red}, ${doc.Green}, ${doc.Blue} | ${euDistance}</div>
+                            <div class="colour-hex">Hex: ${hexColor} | RGB: ${doc.Red}, ${doc.Green}, ${doc.Blue} | ${euDistance} |
+                                ${drawSwatch(16, 16, adjustHue(-40, doc.Red, doc.Green, doc.Blue))}
+                                ${drawSwatch(16, 16, adjustHue(-30, doc.Red, doc.Green, doc.Blue))}
+                                ${drawSwatch(16, 16, adjustHue(-20, doc.Red, doc.Green, doc.Blue))}
+                                ${drawSwatch(16, 16, adjustHue(-10, doc.Red, doc.Green, doc.Blue))}
+
+                                ${drawSwatch(32, 32, adjustHue(-0, doc.Red, doc.Green, doc.Blue))}
+
+                                ${drawSwatch(16, 16, adjustHue(10, doc.Red, doc.Green, doc.Blue))}
+                                ${drawSwatch(16, 16, adjustHue(20, doc.Red, doc.Green, doc.Blue))}
+                                ${drawSwatch(16, 16, adjustHue(30, doc.Red, doc.Green, doc.Blue))}
+                                ${drawSwatch(16, 16, adjustHue(40, doc.Red, doc.Green, doc.Blue))}
+
+                            </div>
                         </div>
                     </div>
                 `;

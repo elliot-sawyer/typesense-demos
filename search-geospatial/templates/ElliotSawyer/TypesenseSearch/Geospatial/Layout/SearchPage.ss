@@ -1,14 +1,26 @@
-    <div class="container-fluid">
-        <div class="row">
+    <div class="container-fluid  g-0">
+        <div class="row g-0">
             <!-- Left column - Search and Results -->
             <div class="col-md-3">
-                <h1>NZ Addresses Search</h1>
-                <p class="text-muted">Explore New Zealand addresses with geospatial search powered by Typesense</p>
+            $HeroImageCSS
+            <div class="jumbotron <% if HeroImage %>hero-image <% end_if %>p-0 mb-0 rounded-0" <% if HeroImage %>data-heroimage-id="$HeroImage.ID" <% end_if %>>
+                <div class="container-fluid">
+                    <div class="row">
+                        <h1 class="display-5 fw-bold text-white mb-4">$MenuTitle</h1>
+                        <p class="text-white">Explore New Zealand addresses with geospatial search powered by Typesense</p>
+                        <div id="nameSearchContainer">
+                            <div id="searchbox"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
 
                 <div class="left-column-wrapper">
                     <div id="searchbox"></div>
 
-                    <div class="my-3">
+                    <div style="margin: 1rem 0rem 1rem 0.5rem">
                         <h5>Filters</h5>
 
                         <div id="facet-region-container" class="mb-3">

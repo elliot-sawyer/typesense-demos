@@ -32,5 +32,6 @@
 </div>
 <% require javascript(https://cdn.jsdelivr.net/npm/instantsearch.js@4) %>
 <% require javascript(https://cdn.jsdelivr.net/npm/typesense-instantsearch-adapter@2/dist/typesense-instantsearch-adapter.min.js) %>
+<% require javascript('search-resene/templates/client/utility.js') %>
 <% require javascript('search-resene/templates/client/resene-search.js') %>
 <% require css('search-resene/templates/client/resene-search.css') %>

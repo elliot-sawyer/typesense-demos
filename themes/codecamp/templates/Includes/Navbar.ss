@@ -6,11 +6,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <% loop Menu(1).Exclude("URLSegment", "home") %>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="$Link">$MenuTitle</a>
+                    <%-- intentionally blank --%>
                 </li>
-            <% end_loop %>
             </ul>
             <div class="d-flex">
                 <div id="federated-search"></div>

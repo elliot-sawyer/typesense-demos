@@ -14,6 +14,7 @@
     <main>
 	$Layout
     </main>
+    <% require themedJavascript("dist/js/bootstrap.min") %>
     <% require themedJavascript("dist/js/codecamp") %>
 
   </body>
