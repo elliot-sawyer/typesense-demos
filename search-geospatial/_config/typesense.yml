@@ -1,7 +1,7 @@
 ElliotSawyer\SilverstripeTypesense\Typesense:
   collections:
     ElliotSawyer\NZStreets\NZStreetAddress:
-      name: Addresses
+      name: Addresses_Codecamp
       fields:
         - { name: Region, type: string, facet: true, sort: false, optional: true }
         - { name: Council, type: string, facet: true, sort: false, optional: true }
