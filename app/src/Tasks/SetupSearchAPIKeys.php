@@ -44,11 +44,16 @@ class SetupSearchAPIKeys extends BuildTask
                 }
             }
 
+            // Addresses_Codecamp also needs access to the suburbs collection for polyline display
+            $collections = $collectionName === 'Addresses_Codecamp'
+                ? [$collectionName, 'suburbs']
+                : [$collectionName];
+
             // Create a new search-only key scoped to this collection
             $result = $client->keys->create([
                 'description' => $description,
                 'actions'     => ['documents:search'],
-                'collections' => [$collectionName],
+                'collections' => $collections,
             ]);
 
             $page->SearchAPIKey = $result['value'];

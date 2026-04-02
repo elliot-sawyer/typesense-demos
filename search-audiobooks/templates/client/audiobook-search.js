@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize InstantSearch
     search = instantsearch({
         searchClient: typesenseInstantsearchAdapter.searchClient,
-        indexName: 'Audiobooks'
+        indexName: searchCollection
     });
 
     // Add widgets
