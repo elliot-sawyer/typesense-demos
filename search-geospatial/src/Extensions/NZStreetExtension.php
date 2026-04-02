@@ -93,8 +93,8 @@ class NZStreetExtension extends Extension
                 'Suburb' => $this->owner->SuburbLocality,
                 'FullAddress' => $this->owner->FullAddress,
                 'Location' => [
-                    (float) round($this->owner->Latitude, 6),
-                    (float) round($this->owner->Longitude, 6)
+                    (float) round($this->owner->ShapeY, 6),
+                    (float) round($this->owner->ShapeX, 6)
                 ],
                 'ClassName' => $this->owner->ClassName,
                 'Created' => strtotime($this->owner->Created),
