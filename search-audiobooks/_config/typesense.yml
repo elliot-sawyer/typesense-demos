@@ -1,7 +1,7 @@
 ElliotSawyer\SilverstripeTypesense\Typesense:
   collections:
     ElliotSawyer\TypesenseSearch\AudiobookSearch\AudiobookLine:
-      name: Audiobooks
+      name: Audiobooks_Codecamp
       # default_sorting_field: Start
       fields:
         - { name: Title, type: string, sort: false, facet: true }

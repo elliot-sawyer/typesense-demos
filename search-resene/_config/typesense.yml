@@ -1,7 +1,7 @@
 ElliotSawyer\SilverstripeTypesense\Typesense:
   collections:
     ElliotSawyer\TypesenseSearch\Resene\ReseneColour:
-      name: Colours
+      name: Colours_Codecamp
       fields:
         - { name: .*, type: auto, optional: true }
         - { name: Charts, type: string[], facet: true, sort: false }
