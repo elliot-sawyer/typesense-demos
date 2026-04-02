@@ -3,6 +3,7 @@ namespace ElliotSawyer\TypesenseSearch\Geospatial;
 
 use ElliotSawyer\SilverstripeTypesense\Typesense;
 use Exception;
+use League\Csv\Reader;
 use SilverStripe\Dev\BuildTask;
 use SilverStripe\ORM\DB;
 
@@ -13,8 +14,11 @@ class TypesenseSuburbImporter extends BuildTask
     public $title = 'Build suburb polylines for Typesense';
 
     private $councils = [];
+    private $councilNames = [];
     private $cities = [];
+    private $citieNames = [];
     private $suburbs = [];
+    private $suburbNames = [];
     private $documents = [];
 
     public function run($request) {
@@ -73,23 +77,26 @@ class TypesenseSuburbImporter extends BuildTask
     public function importSuburbs()
     {
 
-        $suburbsDB = DB::query("SELECT ID, CouncilID, CityID, SuburbID, Polyline FROM NZSuburb");
-        foreach($suburbsDB as $suburb) {
-            $councilName = $this->councils[$suburb['CouncilID']];
-            $cityName = $this->cities[$suburb['CityID']];
-            $suburbName = $this->suburbs[$suburb['SuburbID']];
-            $polyline = $suburb['Polyline'];
+            $csv = Reader::createFromPath(BASE_PATH . '/' . 'Suburb.csv');
+            $csv->setHeaderOffset(0);
+            $records = $csv->getRecords();
+            foreach($records as $id => $record) {
 
-            if($councilName && $cityName && $suburbName && $polyline) {
-                $this->documents[] = [
-                    'id' => (string) $suburb['ID'],
-                    'council.name' => $councilName,
-                    'city.name' => $cityName,
-                    'suburb.name' => $suburbName,
-                    'polyline' => $polyline,
-                ];
+                $councilName = $record['Council'];
+                $cityName = $record['TownCity'];
+                $suburbName = $record['SuburbLocality'];
+                $polyline = $record['Polyline'];
 
-            }
+                if($councilName && $cityName && $suburbName && $polyline) {
+                    $this->documents[] = [
+                        'id' => (string) $id,
+                        'council.name' => $councilName,
+                        'city.name' => $cityName,
+                        'suburb.name' => $suburbName,
+                        'polyline' => $polyline,
+                    ];
+
+                }
         }
     }
 }

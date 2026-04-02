@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         connectionTimeoutSeconds: 2
     };
 
-    if(searchPageContainer.getAttribute('data-path')!= '') {
+    if(serverPath && serverPath != 'null') {
         TYPESENSE_CONFIG.nodes.forEach(function(obj) {
             obj.path = serverPath;
         });
