@@ -1,7 +1,6 @@
 <?php
 namespace ElliotSawyer\TypesenseSearch\Geospatial;
 
-use SilverStripe\Core\ClassInfo;
 use SilverStripe\Core\Extension;
 
 class NZStreetExtension extends Extension

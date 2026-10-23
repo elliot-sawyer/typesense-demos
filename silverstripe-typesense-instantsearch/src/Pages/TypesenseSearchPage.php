@@ -1,15 +1,14 @@
 <?php
 namespace ElliotSawyer\TypesenseSearch;
 
+use SilverStripe\Model\List\ArrayList;
+use SilverStripe\Model\ArrayData;
 use ElliotSawyer\SilverstripeTypesense\Collection;
 use Page;
-use SilverStripe\Core\Convert;
 use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\ListboxField;
 use SilverStripe\Forms\TextField;
-use SilverStripe\ORM\ArrayList;
 use SilverStripe\SiteConfig\SiteConfig;
-use SilverStripe\View\ArrayData;
 use Symbiote\MultiValueField\Fields\KeyValueField;
 
 class TypesenseSearchPage extends Page

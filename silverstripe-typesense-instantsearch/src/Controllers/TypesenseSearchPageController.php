@@ -29,15 +29,15 @@ class TypesenseSearchPageController extends PageController
         }
         ';
         Requirements::customScript($script);
-        Requirements::javascript($this->config()->instantsearch_cdn);
-        Requirements::javascript($this->config()->instantsearch_typesense_cdn);
+        Requirements::javascript($this->config()->get('instantsearch_cdn'));
+        Requirements::javascript($this->config()->get('instantsearch_typesense_cdn'));
 
     }
 
     //avoid hardcoding this
     public function Host()
     {
-        return $this->config()->alternate_typesense_host
+        return $this->config()->get('alternate_typesense_host')
             ?? Typesense::parse_typesense_server()['host']
             ?? '';
     }

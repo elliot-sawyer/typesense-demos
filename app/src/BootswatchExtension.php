@@ -16,7 +16,7 @@ class BootswatchExtension extends Extension
     {
         $fields->addFieldsToTab('Root.Theme', [
             DropdownField::create('Theme', 'Bootswatch Theme')
-                ->setSource(BootswatchDownloader::config()->bootswatch_themes)
+                ->setSource(BootswatchDownloader::config()->get('bootswatch_themes'))
         ]);
     }
 
@@ -25,15 +25,16 @@ class BootswatchExtension extends Extension
         Requirements::themedCSS("dist/css/".$this->owner->Theme.'.min');
     }
 
-    public function requireDefaultRecords()
+    public function onRequireDefaultRecords()
     {
         $task = Injector::inst()->create(BootswatchDownloader::class);
-        $task->run([]);
+        $task->getCSS();
+        $task->getJS();
     }
 
     public function onBeforeWrite()
     {
-        $themes = array_keys(BootswatchDownloader::config()->bootswatch_themes);
+        $themes = array_keys(BootswatchDownloader::config()->get('bootswatch_themes'));
         shuffle($themes);
         $theme = array_shift($themes);
 

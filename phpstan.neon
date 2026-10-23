@@ -1,0 +1,9 @@
+parameters:
+    level: 1
+    paths:
+        - app/src
+        - search-audiobooks/src
+        - search-geospatial/src
+        - search-resene/src
+        - search-scoped/src
+        - silverstripe-typesense-instantsearch/src

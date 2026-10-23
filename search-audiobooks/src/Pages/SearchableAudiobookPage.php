@@ -9,7 +9,7 @@ class SearchableAudiobookPage extends TypesenseSearchPage
     private static $table_name = 'SearchableAudiobook';
     private static $singular_name = 'Searchable audiobook page';
     private static $plural_name = 'Searchable audiobook pages';
-    private static $icon_class = 'font-icon-block-microphone';
+    private static $cms_icon_class = 'font-icon-block-microphone';
     private static $has_one = [
         'Audiobook' => Audiobook::class
     ];

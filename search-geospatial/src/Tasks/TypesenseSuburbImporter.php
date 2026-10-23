@@ -1,6 +1,9 @@
 <?php
 namespace ElliotSawyer\TypesenseSearch\Geospatial;
 
+use Symfony\Component\Console\Input\InputInterface;
+use SilverStripe\PolyExecution\PolyOutput;
+use Symfony\Component\Console\Command\Command;
 use ElliotSawyer\SilverstripeTypesense\Typesense;
 use Exception;
 use League\Csv\Reader;
@@ -9,9 +12,9 @@ use SilverStripe\ORM\DB;
 
 class TypesenseSuburbImporter extends BuildTask
 {
-    private static $segment = 'TypesenseSuburbImporter';
+    protected static string $commandName = 'TypesenseSuburbImporter';
 
-    public $title = 'Build suburb polylines for Typesense';
+    protected string $title = 'Build suburb polylines for Typesense';
 
     private $councils = [];
     private $councilNames = [];
@@ -21,11 +24,13 @@ class TypesenseSuburbImporter extends BuildTask
     private $suburbNames = [];
     private $documents = [];
 
-    public function run($request) {
+    protected function execute(InputInterface $input, PolyOutput $output): int
+    {
         $this->preprocess();
         $this->importSuburbs();
         $this->deleteTypesenseCollection();
         $this->buildTypesenseCollection();
+        return Command::SUCCESS;
     }
 
     public function preprocess()

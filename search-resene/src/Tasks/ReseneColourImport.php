@@ -1,6 +1,9 @@
 <?php
 namespace ElliotSawyer\TypesenseSearch\Resene;
 
+use Symfony\Component\Console\Input\InputInterface;
+use SilverStripe\PolyExecution\PolyOutput;
+use Symfony\Component\Console\Command\Command;
 use League\Csv\Reader;
 use SilverStripe\Dev\BuildTask;
 use SilverStripe\ORM\DB;
@@ -8,22 +11,20 @@ use SilverStripe\Taxonomy\TaxonomyTerm;
 
 class ReseneColourImport extends BuildTask
 {
-    private static $segment = 'ReseneColourImport';
+    protected static string $commandName = 'ReseneColourImport';
 
-    public $title = 'Resene colour import';
+    protected string $title = 'Resene colour import';
 
-    public function run($request) {
+    protected function execute(InputInterface $input, PolyOutput $output): int
+    {
         $csv = Reader::createFromPath(BASE_PATH . '/' . 'resene.csv');
         $csv->setHeaderOffset(0);
         $records = $csv->getRecords();
-
         $reseneColoursParentTag = TaxonomyTerm::get()->find('Name', 'Resene Colour Charts')
             ?: TaxonomyTerm::create(['Name' => 'Resene Colour Charts']);
-
         if(!($reseneColoursParentTag && $reseneColoursParentTag->ID)) {
             $reseneColoursParentTag->write();
         }
-
         foreach($records as $colour) {
             if(!$colour['Code']) continue;
             $chart = $colour['Chart'];
@@ -42,5 +43,6 @@ class ReseneColourImport extends BuildTask
             $resene->Charts()->add($chartTag);
             DB::alteration_message($colour['Name']);
         }
+        return Command::SUCCESS;
     }
 }

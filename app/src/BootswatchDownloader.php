@@ -1,14 +1,17 @@
 <?php
 namespace ElliotSawyer\TypesenseSearch\CodeCamp;
 
+use Symfony\Component\Console\Input\InputInterface;
+use SilverStripe\PolyExecution\PolyOutput;
+use Symfony\Component\Console\Command\Command;
 use GuzzleHttp\Client;
 use SilverStripe\Dev\BuildTask;
 use SilverStripe\ORM\DB;
 
 class BootswatchDownloader extends BuildTask
 {
-    public $title = 'Bootswatch Downloader';
-    private static $segment = 'BootswatchDownloader';
+    protected string $title = 'Bootswatch Downloader';
+    protected static string $commandName = 'BootswatchDownloader';
     private static $bootswatch_themes = [
         'default' => 'Default',
         'cerulean' => 'Cerulean',
@@ -38,13 +41,15 @@ class BootswatchDownloader extends BuildTask
         'zephyr' => 'Zephyr',
     ];
 
-    public function run($request) {
+    protected function execute(InputInterface $input, PolyOutput $output): int
+    {
         $this->getCSS();
         $this->getJS();
+        return Command::SUCCESS;
     }
 
     public function getCSS() {
-        foreach($this->config()->bootswatch_themes as $theme => $name) {
+        foreach($this->config()->get('bootswatch_themes') as $theme => $name) {
             $client = new Client();
             if($theme == 'default') {
                 $url = 'https://bootswatch.com/_vendor/bootstrap/dist/css/bootstrap.min.css';

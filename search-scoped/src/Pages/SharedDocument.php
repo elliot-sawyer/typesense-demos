@@ -1,12 +1,13 @@
 <?php
 namespace ElliotSawyer\TypesenseSearch\ScopedSearch;
 
+use Page;
 use SilverStripe\Core\ClassInfo;
 
-class SharedDocument extends \Page
+class SharedDocument extends Page
 {
     //solely created so Typesense can index by page type
-    private $table_name = 'SharedDocument';
+    private static $table_name = 'SharedDocument';
     private $singular_name = 'Shared document';
     private $plural_name = 'Shared documents';
 

@@ -5,7 +5,6 @@ use SilverStripe\Forms\LiteralField;
 use SilverStripe\Forms\ReadonlyField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\FieldType\DBField;
-use SilverStripe\ORM\FieldType\DBVarchar;
 use SilverStripe\Taxonomy\TaxonomyTerm;
 use SilverStripe\View\Parsers\URLSegmentFilter;
 
@@ -91,7 +90,7 @@ class ReseneColour extends DataObject
         $g = $this->G;
         $b = $this->B;
         // Define the named colors and their RGB values
-        $colors = $this->config()->colours;
+        $colors = $this->config()->get('colours');
 
         // Calculate the Euclidean distance for each named color
         $closestColor = null;
@@ -111,10 +110,10 @@ class ReseneColour extends DataObject
         }
 
         // Check if it's a shade of gray
-        $greyThreshold = $this->config()->thresholds['grey'];
-        $whiteThreshold = $this->config()->thresholds['white'];
-        $blackThreshold = $this->config()->thresholds['black'];
-        $brownThreshold = $this->config()->thresholds['brown'];
+        $greyThreshold = $this->config()->get('thresholds')['grey'];
+        $whiteThreshold = $this->config()->get('thresholds')['white'];
+        $blackThreshold = $this->config()->get('thresholds')['black'];
+        $brownThreshold = $this->config()->get('thresholds')['brown'];
         if (abs($r - $g) <= $greyThreshold && abs($r - $b) <= $greyThreshold && abs($g - $b) <= $greyThreshold) {
             return 'grey';
         }

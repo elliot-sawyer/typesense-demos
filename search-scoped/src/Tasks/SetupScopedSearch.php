@@ -1,6 +1,9 @@
 <?php
 namespace ElliotSawyer\TypesenseSearch\ScopedSearch;
 
+use Symfony\Component\Console\Input\InputInterface;
+use SilverStripe\PolyExecution\PolyOutput;
+use Symfony\Component\Console\Command\Command;
 use Page;
 use SilverStripe\Dev\BuildTask;
 use SilverStripe\ORM\DB;
@@ -9,24 +12,20 @@ use SilverStripe\Security\Member;
 
 class SetupScopedSearch extends BuildTask
 {
-    private static $segment = 'SetupScopedSearch';
+    protected string $title = 'Setup scoped search';
+
+    protected static string $description = 'Setup scoped search';
+
+    protected static string $commandName = 'SetupScopedSearch';
     private static $speakers = [];
     private static $default_password = 'Test00!!';
-    public function getTitle()
-    {
-        return 'Setup scoped search';
-    }
-
-    public function getDescription()
-    {
-        return 'Setup scoped search';
-    }
-    public function run($request = null)
+    protected function execute(InputInterface $input, PolyOutput $output): int
     {
         $this->makeMembers();
         $this->clearMemberKeys();
         $parent = $this->createParentPage();
         $this->createSharedDocuments($parent);
+        return Command::SUCCESS;
     }
 
     public function makeMembers()
@@ -34,12 +33,12 @@ class SetupScopedSearch extends BuildTask
         $group = Group::get()->find('Title', 'Demo users')
             ?: Group::create(['Title' => 'Demo users']);
         $group->write();
-        $speakers = $this->config()->speakers;
+        $speakers = $this->config()->get('speakers');
         foreach($speakers as $speaker) {
             $member = Member::get()->filter($speaker)->first()
                 ?: Member::create($speaker);
             if(!($member && $member->ID)) {
-                $member->Password = $this->config()->default_password;
+                $member->Password = $this->config()->get('default_password');
                 $group->Members()->add($member);
                 DB::alteration_message('...created ' . $member->Email);
             }
@@ -71,8 +70,7 @@ class SetupScopedSearch extends BuildTask
      * Create 100 SharedDocument pages
      *
      * @param Page $parent
-     * @param \SilverStripe\ORM\DataList $members
-     * @return \SilverStripe\ORM\DataList
+     * @return void
      */
     protected function createSharedDocuments(ScopedSearchPage $parent)
     {
@@ -95,7 +93,6 @@ class SetupScopedSearch extends BuildTask
             $opts = ['Title' => $title, 'ParentID' => $parent->ID, 'CanViewType' => 'OnlyTheseMembers'];
             $page = SharedDocument::get()->filter($opts)->first();
             if($page && $page->ID && $page->ViewerMembers()->Count() == 0) {
-                dd($page->ID, $page->$page->ViewerMembers()->Count());
                 continue;
             }
             $rnd = random_int(2, 5);

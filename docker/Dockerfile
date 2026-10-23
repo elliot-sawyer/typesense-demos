@@ -1,4 +1,4 @@
-FROM php:8.3-apache-bookworm
+FROM php:8.5-apache-bookworm
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
@@ -63,7 +63,7 @@ RUN chown -R 33:33 $DOCUMENT_ROOT
 
 RUN DEBIAN_FRONTEND=noninteractive apt purge -y git unzip
 # Hacky approach to ensuring apache has access to it's root folder
- RUN sed -i 's|set -e|set -e\n\n/var/www/html/vendor/bin/sake dev/build flush=all\n\n\nchown -R www-data:www-data /var/www/html\n |' /usr/local/bin/docker-php-entrypoint
+ RUN sed -i 's|set -e|set -e\n\n/var/www/html/vendor/bin/sake db:build --flush\n\n\nchown -R www-data:www-data /var/www/html\n |' /usr/local/bin/docker-php-entrypoint
 
 RUN chown -R www-data:www-data \
     /var/www/html/public/assets/.protected \
