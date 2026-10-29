@@ -5,8 +5,8 @@
     "license": "BSD-3-Clause",
     "require": {
         "php": "^8.3",
-        "silverstripe/recipe-cms": "~6.2.0@stable",
-        "silverstripe/htmleditor-tinymce": "^1.1",
+        "silverstripe/recipe-cms": "~6.3.0",
+        "silverstripe/htmleditor-tinymce": "^1.2",
         "symbiote/silverstripe-queuedjobs": "^6.2",
         "symbiote/silverstripe-multivaluefield": "^7.0",
         "symbiote/silverstripe-gridfieldextensions": "^5.2",
